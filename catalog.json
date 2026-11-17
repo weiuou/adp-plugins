@@ -8,6 +8,14 @@
       "version": "0.2.0",
       "path": "plugins/dima",
       "description": "Branch activity, approval waits and native auxiliary-model summaries for dima."
+    },
+    {
+      "id": "dimagent-desktop",
+      "name": "DimAgent Desktop",
+      "host": "DimAgent desktop",
+      "version": "0.1.0",
+      "path": "plugins/dimagent-desktop",
+      "description": "Status hooks for the DimAgent desktop client. Separate from the Rust alpha dima integration."
     }
   ]
 }

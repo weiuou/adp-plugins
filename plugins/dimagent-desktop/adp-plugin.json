@@ -1,0 +1,112 @@
+{
+  "apiVersion": 1,
+  "id": "dimagent-desktop",
+  "name": "DimAgent Desktop",
+  "version": "0.1.0",
+  "description": "Status hooks for the DimAgent desktop client. Separate from the Rust alpha dima integration.",
+  "icon": "icon.png",
+  "presenceImage": "https://dimagent.cn/favicon.png",
+  "setup": {
+    "kind": "manual",
+    "instructions": "Install the managed copy with the desktop-compatible dim CLI, then reload DimAgent.",
+    "command": [
+      "dim",
+      "plugin",
+      "install",
+      "{pluginRoot}"
+    ]
+  },
+  "integration": {
+    "kind": "policy",
+    "events": [
+      {
+        "id": "SessionStart",
+        "capability": "presence",
+        "description": "Initialize activity for a DimAgent desktop session.",
+        "required": true,
+        "requires": []
+      },
+      {
+        "id": "UserPromptSubmit",
+        "capability": "presence",
+        "description": "Show working when a desktop prompt starts.",
+        "required": true,
+        "requires": []
+      },
+      {
+        "id": "Stop",
+        "capability": "presence",
+        "description": "Show idle when the desktop reply stops.",
+        "required": true,
+        "requires": []
+      },
+      {
+        "id": "PostToolUse",
+        "capability": "presence",
+        "description": "Restore working after a tool completes or approval is answered.",
+        "required": true,
+        "requires": []
+      },
+      {
+        "id": "PreToolUse",
+        "capability": "tools",
+        "description": "Show working before a desktop tool runs.",
+        "required": false,
+        "requires": [
+          "PostToolUse"
+        ]
+      },
+      {
+        "id": "PermissionRequest",
+        "capability": "waiting",
+        "description": "Show waiting when the desktop requests permission.",
+        "required": false,
+        "requires": [
+          "PostToolUse"
+        ]
+      },
+      {
+        "id": "PreCompact",
+        "capability": "presence",
+        "description": "Keep working while the desktop compacts context.",
+        "required": false,
+        "requires": [
+          "PostCompact"
+        ]
+      },
+      {
+        "id": "PostCompact",
+        "capability": "presence",
+        "description": "Restore working after desktop context compaction.",
+        "required": false,
+        "requires": [
+          "PreCompact"
+        ]
+      },
+      {
+        "id": "SubagentStop",
+        "capability": "cleanup",
+        "description": "Clear a child session when its agent finishes.",
+        "required": true,
+        "requires": []
+      }
+    ],
+    "removalInstructions": "Remove agent-discord-presence-desktop using DimAgent desktop plugin management, then reload the client."
+  },
+  "locales": {
+    "zh-CN": {
+      "Initialize activity for a DimAgent desktop session.": "初始化 DimAgent 桌面会话的活动状态。",
+      "Show working when a desktop prompt starts.": "桌面端开始处理提示词时显示工作中。",
+      "Show idle when the desktop reply stops.": "桌面端回复停止时显示空闲。",
+      "Restore working after a tool completes or approval is answered.": "工具完成或审批得到答复后恢复工作状态。",
+      "Show working before a desktop tool runs.": "桌面端执行工具前显示工作中。",
+      "Show waiting when the desktop requests permission.": "桌面端请求权限时显示等待确认。",
+      "Keep working while the desktop compacts context.": "桌面端压缩上下文时保持工作状态。",
+      "Restore working after desktop context compaction.": "桌面端压缩上下文后恢复工作状态。",
+      "Clear a child session when its agent finishes.": "子智能体结束时清理其会话活动。",
+      "Install the managed copy with the desktop-compatible dim CLI, then reload DimAgent.": "使用桌面端兼容的 dim CLI 安装托管副本，然后重新加载 DimAgent。",
+      "Remove agent-discord-presence-desktop using DimAgent desktop plugin management, then reload the client.": "请通过 DimAgent 桌面端插件管理移除 agent-discord-presence-desktop，然后重新加载客户端。",
+      "Status hooks for the DimAgent desktop client. Separate from the Rust alpha dima integration.": "DimAgent 桌面端的状态钩子。与 Rust alpha dima 集成独立。"
+    }
+  }
+}

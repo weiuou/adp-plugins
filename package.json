@@ -10,6 +10,7 @@
   },
   "scripts": {
     "check": "node scripts/check.mjs",
-    "test:integration": "node --test test/dima.integration.test.mjs"
+    "test:integration": "node --test test/*.integration.test.mjs",
+    "test": "node --test test/unit/*.test.mjs"
   }
 }

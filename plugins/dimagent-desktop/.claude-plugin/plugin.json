@@ -1,0 +1,6 @@
+{
+  "name": "agent-discord-presence-desktop",
+  "version": "0.1.0",
+  "description": "Discord Rich Presence status hooks for the DimAgent desktop client",
+  "hooks": "hooks.json"
+}

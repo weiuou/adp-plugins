@@ -7,6 +7,7 @@ External plugins for [Agent Discord Presence (ADP)](https://github.com/weiuou/ag
 | Host | Plugin | ADP ID | Package folder |
 | --- | --- | --- | --- |
 | dima / Dim Rust alpha | [DimAgent](plugins/dima/README.md) | `dimagent` | `plugins/dima` |
+| DimAgent desktop | [DimAgent Desktop](plugins/dimagent-desktop/README.md) | `dimagent-desktop` | `plugins/dimagent-desktop` |
 
 This repository can host plugins for other agents. Built-in ADP integrations, including Pi, continue to use their existing installation paths.
 
@@ -36,9 +37,10 @@ Node.js 22+ is required for the checks. No npm dependencies or compilation are n
 
 ```sh
 npm run check
+npm test
 ```
 
-The dima integration tests use a separately built, plugin-capable ADP checkout. In PowerShell:
+The integration tests use a separately built, plugin-capable ADP checkout. In PowerShell:
 
 ```powershell
 $env:ADP_SOURCE_DIR = '<path-to-agent-discord-presence>'
