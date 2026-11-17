@@ -1,0 +1,232 @@
+{
+  "apiVersion": 1,
+  "id": "dimagent",
+  "name": "DimAgent",
+  "version": "0.2.0",
+  "description": "Dim Rust alpha (dima) sessions, approval waits and native auxiliary-model summaries. Shares existing DimAgent settings.",
+  "icon": "icon.png",
+  "presenceImage": "https://dimagent.cn/favicon.png",
+  "extension": "extension.mjs",
+  "setup": {
+    "kind": "manual",
+    "instructions": "Install this package into dima, then reload the plugin or restart dima.",
+    "command": [
+      "dima",
+      "plugin",
+      "install",
+      "{pluginRoot}"
+    ]
+  },
+  "integration": {
+    "kind": "policy",
+    "events": [
+      {
+        "id": "branch/start",
+        "capability": "presence",
+        "description": "Initialize activity for a Dim branch.",
+        "required": true,
+        "requires": []
+      },
+      {
+        "id": "branch/resume",
+        "capability": "presence",
+        "description": "Resume activity for a Dim branch.",
+        "required": true,
+        "requires": []
+      },
+      {
+        "id": "context/configured",
+        "capability": "presence",
+        "description": "Track the branch model and provider.",
+        "required": true,
+        "requires": []
+      },
+      {
+        "id": "turn/start",
+        "capability": "presence",
+        "description": "Show working when a Dim turn starts.",
+        "required": true,
+        "requires": []
+      },
+      {
+        "id": "turn/end",
+        "capability": "presence",
+        "description": "Show idle after a Dim turn finishes.",
+        "required": true,
+        "requires": []
+      },
+      {
+        "id": "stop/interrupt",
+        "capability": "presence",
+        "description": "Cancel pending summaries and show idle after interruption.",
+        "required": true,
+        "requires": []
+      },
+      {
+        "id": "branch/end",
+        "capability": "cleanup",
+        "description": "Close the branch reporter and cancel pending summaries.",
+        "required": true,
+        "requires": []
+      },
+      {
+        "id": "plugin/unload",
+        "capability": "cleanup",
+        "description": "Release all reporters and summary jobs.",
+        "required": true,
+        "requires": [],
+        "source": "ctx.effect"
+      },
+      {
+        "id": "approval/request",
+        "capability": "waiting",
+        "description": "Show waiting when an approval is requested.",
+        "required": false,
+        "requires": [
+          "approval/respond",
+          "approval/cancelled"
+        ]
+      },
+      {
+        "id": "approval/respond",
+        "capability": "waiting",
+        "description": "Restore activity after an approval is answered.",
+        "required": false,
+        "requires": [
+          "approval/request",
+          "approval/cancelled"
+        ]
+      },
+      {
+        "id": "approval/cancelled",
+        "capability": "waiting",
+        "description": "Restore activity after an approval is cancelled.",
+        "required": false,
+        "requires": [
+          "approval/request",
+          "approval/respond"
+        ]
+      },
+      {
+        "id": "step/model-start",
+        "capability": "summary",
+        "description": "Reset reply collection at the start of a model response.",
+        "required": false,
+        "requires": [
+          "step/text",
+          "step/model-content",
+          "step/model-output-end",
+          "step/tool-use-start",
+          "step/tool-use"
+        ],
+        "source": "session/event"
+      },
+      {
+        "id": "step/text",
+        "capability": "summary",
+        "description": "Collect completed assistant text for automatic summaries.",
+        "required": false,
+        "requires": [
+          "step/model-start",
+          "step/model-content",
+          "step/model-output-end",
+          "step/tool-use-start",
+          "step/tool-use"
+        ],
+        "source": "session/event"
+      },
+      {
+        "id": "step/model-content",
+        "capability": "summary",
+        "description": "Track completed model content and exclude tool responses.",
+        "required": false,
+        "requires": [
+          "step/model-start",
+          "step/text",
+          "step/model-output-end",
+          "step/tool-use-start",
+          "step/tool-use"
+        ],
+        "source": "session/event"
+      },
+      {
+        "id": "step/model-output-end",
+        "capability": "summary",
+        "description": "Verify that the model response completed normally.",
+        "required": false,
+        "requires": [
+          "step/model-start",
+          "step/text",
+          "step/model-content",
+          "step/tool-use-start",
+          "step/tool-use"
+        ],
+        "source": "session/event"
+      },
+      {
+        "id": "step/tool-use-start",
+        "capability": "summary",
+        "description": "Exclude replies that are continuing into a tool call.",
+        "required": false,
+        "requires": [
+          "step/model-start",
+          "step/text",
+          "step/model-content",
+          "step/model-output-end",
+          "step/tool-use"
+        ],
+        "source": "session/event"
+      },
+      {
+        "id": "step/tool-use",
+        "capability": "summary",
+        "description": "Track tool continuations before final reply completion.",
+        "required": false,
+        "requires": [
+          "step/model-start",
+          "step/text",
+          "step/model-content",
+          "step/model-output-end",
+          "step/tool-use-start"
+        ],
+        "source": "session/event"
+      },
+      {
+        "id": "turn/failure",
+        "capability": "errors",
+        "description": "Show an error when a Dim turn fails.",
+        "required": false,
+        "requires": [
+          "turn/end"
+        ],
+        "source": "turn/end"
+      }
+    ],
+    "removalInstructions": "Remove Agent Discord Presence using dima's plugin manager, then reload or restart dima."
+  },
+  "locales": {
+    "zh-CN": {
+      "Initialize activity for a Dim branch.": "初始化 Dim 分支的活动状态。",
+      "Resume activity for a Dim branch.": "恢复 Dim 分支的活动状态。",
+      "Track the branch model and provider.": "跟踪分支所用的模型和服务商。",
+      "Show working when a Dim turn starts.": "Dim 开始一轮任务时显示工作中。",
+      "Show idle after a Dim turn finishes.": "Dim 一轮任务结束后显示空闲。",
+      "Cancel pending summaries and show idle after interruption.": "中断后取消待处理摘要并显示空闲。",
+      "Close the branch reporter and cancel pending summaries.": "关闭分支的状态上报并取消待处理摘要。",
+      "Release all reporters and summary jobs.": "释放所有活动上报器和摘要任务。",
+      "Show waiting when an approval is requested.": "请求审批时显示等待确认。",
+      "Restore activity after an approval is answered.": "审批得到答复后恢复活动状态。",
+      "Restore activity after an approval is cancelled.": "审批取消后恢复活动状态。",
+      "Reset reply collection at the start of a model response.": "模型开始回复时重置回复采集。",
+      "Collect completed assistant text for automatic summaries.": "为自动摘要采集完整助手回复。",
+      "Track completed model content and exclude tool responses.": "跟踪模型的完整回复，并排除工具响应。",
+      "Verify that the model response completed normally.": "确认模型回复已正常完成。",
+      "Exclude replies that are continuing into a tool call.": "排除即将继续调用工具的中间回复。",
+      "Track tool continuations before final reply completion.": "跟踪最终回复完成前的工具调用续接。",
+      "Show an error when a Dim turn fails.": "Dim 一轮任务失败时显示错误状态。",
+      "Remove Agent Discord Presence using dima's plugin manager, then reload or restart dima.": "请通过 dima 的插件管理器移除 Agent Discord Presence，然后重新加载或重启 dima。",
+      "Dim Rust alpha (dima) sessions, approval waits and native auxiliary-model summaries. Shares existing DimAgent settings.": "支持 Dim Rust alpha（dima）的会话、审批等待和原生辅助模型摘要。沿用已有的 DimAgent 设置。",
+      "Install this package into dima, then reload the plugin or restart dima.": "将此插件包安装到 dima，然后重新加载插件或重启 dima。"
+    }
+  }
+}

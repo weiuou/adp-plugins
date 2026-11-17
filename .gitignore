@@ -1,0 +1,8 @@
+node_modules/
+dist/
+build/
+coverage/
+.adp-runtime.json
+*.log
+.DS_Store
+Thumbs.db

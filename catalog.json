@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "plugins": [
+    {
+      "id": "dimagent",
+      "name": "DimAgent",
+      "host": "dima",
+      "version": "0.2.0",
+      "path": "plugins/dima",
+      "description": "Branch activity, approval waits and native auxiliary-model summaries for dima."
+    }
+  ]
+}

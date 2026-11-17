@@ -1,0 +1,15 @@
+{
+  "name": "adp-plugins",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "External Agent Discord Presence plugins",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "check": "node scripts/check.mjs",
+    "test:integration": "node --test test/dima.integration.test.mjs"
+  }
+}
