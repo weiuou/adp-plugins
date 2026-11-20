@@ -23,6 +23,9 @@ for (const entry of catalog.plugins) {
   assert.equal(manifest.apiVersion, 1);
   assert.equal(manifest.id, entry.id);
   assert.equal(manifest.version, entry.version);
+  const pkg = JSON.parse(readFileSync(join(folder, 'package.json'), 'utf8'));
+  assert.equal(pkg.name, `adp-plugin-${entry.path.split('/').at(-1)}`, 'Use the adp-plugin-<host> npm naming convention');
+  assert.equal(pkg.version, manifest.version);
   for (const key of ['icon', 'extension', 'summaryWorker']) {
     if (manifest[key]) assert.ok(lstatSync(inside(folder, manifest[key])).isFile(), `Missing ${key}`);
   }

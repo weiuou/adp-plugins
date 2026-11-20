@@ -1,6 +1,6 @@
 # ADP plugins
 
-External plugins for [Agent Discord Presence (ADP)](https://github.com/weiuou/agent-discord-presence). Each plugin lives in its own directory and is installed explicitly through ADP's existing **Agents** page.
+External plugins for [Agent Discord Presence (ADP)](https://github.com/weiuou/agent-discord-presence). Each plugin lives in its own directory and can be installed through ADP's existing **Agents** page. Builds with npm auto-discovery also recognize globally installed npm plugin packages.
 
 ## Available plugins
 
@@ -8,6 +8,8 @@ External plugins for [Agent Discord Presence (ADP)](https://github.com/weiuou/ag
 | --- | --- | --- | --- |
 | dima / Dim Rust alpha | [DimAgent](plugins/dima/README.md) | `dimagent` | `plugins/dima` |
 | DimAgent desktop | [DimAgent Desktop](plugins/dimagent-desktop/README.md) | `dimagent-desktop` | `plugins/dimagent-desktop` |
+
+npm packages in this collection use the `adp-plugin-<host>` naming convention.
 
 This repository can host plugins for other agents. Built-in ADP integrations, including Pi, continue to use their existing installation paths.
 
@@ -54,3 +56,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for adding plugins and [the package API](
 ## License
 
 MIT. The ADP runtime and SDK are provided by Agent Discord Presence; their existing attribution is retained in [LICENSE](LICENSE).
+
+For a local npm package trial, run `npm run pack -- dima`, then
+`npm install -g ./dist/adp-plugin-dima-0.2.0.tgz`. See the dima package README for
+the ADP auto-discovery and native host installation steps.

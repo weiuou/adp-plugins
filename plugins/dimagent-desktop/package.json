@@ -1,5 +1,5 @@
 {
-  "name": "adp-agent-dimagent-desktop",
+  "name": "adp-plugin-dimagent-desktop",
   "version": "0.1.0",
   "private": true,
   "type": "module"

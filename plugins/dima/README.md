@@ -24,3 +24,29 @@ See [the package contract](../../docs/plugin-api.md).
 
 The package uses the SDK supplied by the ADP managed copy. Loading `index.js`
 directly from this checkout before installing it through ADP is unsupported.
+
+## npm package workflow
+
+With an npm-autoload-capable ADP build, a globally installed npm package is
+recognized automatically. Install the published package with:
+
+```sh
+npm install -g adp-plugin-dima
+```
+
+To test a local checkout before publishing:
+
+```sh
+npm run pack -- dima
+npm install -g ./dist/adp-plugin-dima-0.2.0.tgz
+```
+
+Run these commands from the repository root. ADP detects `adp-plugin-dima` and
+adds the existing `dimagent` Agent within about ten seconds, retaining its normal
+settings scope. Use Setup to install the ADP-managed copy into dima and reload it.
+Do not install the unbound global npm folder directly into dima.
+
+The tarball includes only its runtime files, manifest, icon, documentation and
+license, with no machine-local SDK/config binding. Replacing the global package
+with a newer release refreshes its managed copy; follow Setup and reload the host.
+To stop npm discovery, remove it with `npm uninstall -g adp-plugin-dima`.

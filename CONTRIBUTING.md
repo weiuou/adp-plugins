@@ -1,6 +1,6 @@
 # Adding an ADP plugin
 
-1. Create a directory under `plugins/<host>/` containing a complete `adp-plugin.json` package.
+1. Create a directory under `plugins/<host>/` containing a complete `adp-plugin.json` package. Name its npm package `adp-plugin-<host>` (for example, `adp-plugin-dima`). This naming rule applies to all packages in this collection; the stable ADP ID is a separate field.
 2. Give it a stable, unique ADP ID. Keep that ID across updates so existing per-agent settings remain usable.
 3. Include host-side entry files and installation, reload, update, and removal instructions in the package README. Declare host installation commands and translations in the manifest.
 4. Add the package to `catalog.json`; keep its ID, path, and version consistent with the manifest.

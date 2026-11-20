@@ -1,6 +1,29 @@
 {
-  "name": "adp-agent-dim",
+  "name": "adp-plugin-dima",
   "version": "0.2.0",
-  "private": true,
-  "type": "module"
+  "type": "module",
+  "description": "Discord Rich Presence plugin for dima / Dim Rust alpha",
+  "license": "MIT",
+  "files": [
+    "adp-plugin.json",
+    "dim-plugin.json",
+    "extension.mjs",
+    "extension.d.mts",
+    "index.js",
+    "icon.png",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/weiuou/adp-plugins.git",
+    "directory": "plugins/dima"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
 }

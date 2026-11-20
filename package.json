@@ -11,6 +11,7 @@
   "scripts": {
     "check": "node scripts/check.mjs",
     "test:integration": "node --test test/*.integration.test.mjs",
-    "test": "node --test test/unit/*.test.mjs"
+    "test": "node --test test/unit/*.test.mjs",
+    "pack": "node scripts/pack.mjs"
   }
 }
